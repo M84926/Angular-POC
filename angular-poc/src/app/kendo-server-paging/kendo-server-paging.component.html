@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-xs-12">
+      <div>
+  
+  
+        <kendo-grid [data]="gridView" [pageSize]="state.take" [skip]="state.skip" [pageable]="true" 
+                    [height]="500" [loading]="loading" (pageChange)="pageChange($event)">
+          <kendo-grid-column field="id" title="Id" [width]="140">
+          </kendo-grid-column>
+          <kendo-grid-column field="firstName" title="First Name" [width]="140">
+          </kendo-grid-column>
+          <kendo-grid-column field="lastName" title="Last Name" [width]="140">
+          </kendo-grid-column>
+          <kendo-grid-column field="email" title="Email" [width]="140">
+          </kendo-grid-column>
+          <kendo-grid-column field="userName" title="User Name" [width]="140">
+          </kendo-grid-column>
+          <kendo-grid-column field="gender" title="Gender" [width]="140">
+          </kendo-grid-column>
+          <kendo-grid-column field="isVerified" title="Verified" [width]="140">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <input type="checkbox" [checked]="dataItem.isVerified" />
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="isDocsSubmited" title="Docs Submited" [width]="140">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <input type="checkbox" [checked]="dataItem.isDocsSubmited" />
+            </ng-template>
+          </kendo-grid-column>
+          <!-- <kendo-grid-column field="address" title="Address" [width]="140">
+          </kendo-grid-column> -->
+          <!-- <kendo-grid-column field="hobbies" title="Hobbies" [width]="140">
+          </kendo-grid-column> -->
+          <kendo-grid-column field="city.cityName" title="City" [width]="140">
+          </kendo-grid-column>
+        </kendo-grid>
+  
+        <!-- <a style="cursor: pointer;" routerLinkActive="active" class="list-group-item clearfix">
+          <div class="pull-left">
+            <h4 class="list-group-item-heading">{{ user.id }}</h4>
+            <p class="list-group-item-text">{{ user.name }}</p>
+          </div> -->
+  
+  
+      </div>
+    </div>
+  </div>

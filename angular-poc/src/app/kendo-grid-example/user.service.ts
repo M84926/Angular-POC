@@ -9,14 +9,19 @@ export class UserService {
 
     constructor(private _http: HttpClient, private _base: BaseApp) { }
 
-    getUsers() {
-        
-        return new Promise((resolve,reject) => {
-            var uri = this._base.Url + 'user/GetAllUsers';
+    getUsers(skip = 1, take = 99999) {
+
+        return new Promise((resolve, reject) => {
+
+            var uri = this._base.Url + 'user/GetAllUsers'
+            uri += '?skip=' + skip + '&take=' + take;
+
             this._http.get(uri).subscribe((response: IApiResponse) => {
                 resolve(response);
             });
-        });        
+        });
     }
+
+
 
 }

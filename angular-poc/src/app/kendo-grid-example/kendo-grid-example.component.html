@@ -3,14 +3,10 @@
     <div>
 
 
-      <kendo-grid [data]="users" 
-                  [height]="410" 
-                  [pageSize]="10"
-                  [pageable]="true"
-                  [sortable]="true"
-                  [filterable]="true"
-                  [selectable]="true">
-
+      <kendo-grid [data]="gridView" [pageSize]="10" [skip]="skip" [pageable]="true" 
+                  [height]="600" [loading]="loading" (pageChange)="pageChange($event)">
+        <kendo-grid-column field="id" title="Id" [width]="140">
+        </kendo-grid-column>
         <kendo-grid-column field="firstName" title="First Name" [width]="140">
         </kendo-grid-column>
         <kendo-grid-column field="lastName" title="Last Name" [width]="140">
@@ -31,10 +27,10 @@
             <input type="checkbox" [checked]="dataItem.isDocsSubmited" />
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="address" title="Address" [width]="140">
-        </kendo-grid-column>
-        <kendo-grid-column field="hobbies" title="Hobbies" [width]="140">
-        </kendo-grid-column>
+        <!-- <kendo-grid-column field="address" title="Address" [width]="140">
+        </kendo-grid-column> -->
+        <!-- <kendo-grid-column field="hobbies" title="Hobbies" [width]="140">
+        </kendo-grid-column> -->
         <kendo-grid-column field="city.cityName" title="City" [width]="140">
         </kendo-grid-column>
       </kendo-grid>

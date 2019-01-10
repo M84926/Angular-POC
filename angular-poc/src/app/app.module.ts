@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppRouting } from './app-routing.module';
@@ -18,9 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './kendo-grid-example/user.service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './authentication/token.interceptor';
-
-
-
+import { KendoServerPagingComponent } from './kendo-server-paging/kendo-server-paging.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +27,8 @@ import { TokenInterceptor } from './authentication/token.interceptor';
     HomeComponent,
     KendoGridExampleComponent,
     HeaderComponent,
-    DropdownDirective
+    DropdownDirective,
+    KendoServerPagingComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +37,7 @@ import { TokenInterceptor } from './authentication/token.interceptor';
     ReactiveFormsModule,
     AppRouting,
     GridModule,
+    FormsModule,
     BrowserAnimationsModule
   ],
   providers: [AuthenticationService, BaseApp, AuthGuard, UserService,{
