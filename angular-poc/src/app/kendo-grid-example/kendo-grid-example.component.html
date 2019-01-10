@@ -4,10 +4,17 @@
 
 
       <kendo-grid [data]="gridView" [pageSize]="10" [skip]="skip" [pageable]="true" 
-                  [height]="600" [loading]="loading" (pageChange)="pageChange($event)">
+                  [height]="500" [loading]="loading" (pageChange)="pageChange($event)"
+                  [sortable]="{
+                    allowUnsort: allowUnsort,
+                    mode: multiple ? 'multiple' : 'single'
+                    }"
+                  [sort]="sort"
+                  (sortChange)="sortChange($event)">
+
         <kendo-grid-column field="id" title="Id" [width]="140">
         </kendo-grid-column>
-        <kendo-grid-column field="firstName" title="First Name" [width]="140">
+        <kendo-grid-column field="firstName" title="First Name" [width]="140" >
         </kendo-grid-column>
         <kendo-grid-column field="lastName" title="Last Name" [width]="140">
         </kendo-grid-column>
@@ -17,12 +24,12 @@
         </kendo-grid-column>
         <kendo-grid-column field="gender" title="Gender" [width]="140">
         </kendo-grid-column>
-        <kendo-grid-column field="isVerified" title="Verified" [width]="140">
+        <kendo-grid-column field="isVerified" title="Verified" [width]="140" [sortable]="false">
           <ng-template kendoGridCellTemplate let-dataItem>
             <input type="checkbox" [checked]="dataItem.isVerified" />
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="isDocsSubmited" title="Docs Submited" [width]="140">
+        <kendo-grid-column field="isDocsSubmited" title="Docs Submited" [width]="140" [sortable]="false">
           <ng-template kendoGridCellTemplate let-dataItem>
             <input type="checkbox" [checked]="dataItem.isDocsSubmited" />
           </ng-template>

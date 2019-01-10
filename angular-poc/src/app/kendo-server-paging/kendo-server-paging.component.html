@@ -4,7 +4,13 @@
   
   
         <kendo-grid [data]="gridView" [pageSize]="state.take" [skip]="state.skip" [pageable]="true" 
-                    [height]="500" [loading]="loading" (pageChange)="pageChange($event)">
+                    [height]="500" [loading]="loading" (pageChange)="pageChange($event)"
+                    [sortable]="{
+                      allowUnsort: allowUnsort,
+                      mode: multiple ? 'multiple' : 'single'
+                      }"
+                    [sort]="sort"
+                    (sortChange)="sortChange($event)">
           <kendo-grid-column field="id" title="Id" [width]="140">
           </kendo-grid-column>
           <kendo-grid-column field="firstName" title="First Name" [width]="140">

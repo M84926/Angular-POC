@@ -3,7 +3,7 @@ import { PageChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { IApiResponse } from '../shared/api-response.model';
 import { User } from '../kendo-grid-example/user.model';
 import { UserService } from '../kendo-grid-example/user.service';
-import { State } from '@progress/kendo-data-query';
+import { State, SortDescriptor } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-kendo-server-paging',
@@ -12,14 +12,25 @@ import { State } from '@progress/kendo-data-query';
 })
 export class KendoServerPagingComponent implements OnInit {
 
-  public gridView: GridDataResult;
-
   private users: User[];
+
+  // Grid
+  public gridView: GridDataResult;
   private loading: boolean = true;
+
+  // Paging
   public state: State = {
     skip: 0,
     take: 5
   };
+
+  // sorting
+  public multiple = true;
+  public allowUnsort = true;
+  public sort: SortDescriptor[] = [{
+    field: 'firstName',
+    dir: 'asc'
+  }];
 
   constructor(private userService: UserService) { }
 
@@ -27,14 +38,16 @@ export class KendoServerPagingComponent implements OnInit {
     this.loadItems();
   }
 
-  public pageChange(event: PageChangeEvent): void {
-    this.state.skip = event.skip;
-    this.loadItems();
-  }
-
   private loadItems(): void {
-    debugger;
-    this.userService.getUsers(this.state.skip, this.state.take).then((response: IApiResponse) => {
+
+    let orderby: string = "";
+    if (this.sort.length > 0) {
+      this.sort.forEach(element => {
+        orderby += element.field + "=" + element.dir + ";"
+      });
+    }
+
+    this.userService.getUsers(this.state.skip, this.state.take,orderby).then((response: IApiResponse) => {
       if (response.isSuccess) {
         this.loading = false;
         this.users = response.data[0].users;
@@ -45,6 +58,17 @@ export class KendoServerPagingComponent implements OnInit {
 
       }
     });
+  }
+
+  public pageChange(event: PageChangeEvent): void {
+    this.state.skip = event.skip;
+    this.loadItems();
+  }
+
+  public sortChange(sort: SortDescriptor[]): void {
+    debugger;
+    this.sort = sort;
+    this.loadItems();
   }
 
 }
